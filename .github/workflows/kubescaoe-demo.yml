@@ -30,4 +30,4 @@ jobs:
 
       # Step 5: Scan YAML files with Kubescape
       - name: Scan YAML files
-        run: kubescape scan framework nsa **/*.yaml
+        run: kubescape scan framework nsa *.yaml
