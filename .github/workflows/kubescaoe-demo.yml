@@ -11,17 +11,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Step 1: Checkout the repository
       - name: Checkout Repository
         uses: actions/checkout@v3
 
+      # Step 2: Install Kubescape CLI
       - name: Install Kubescape
         run: |
           curl -s https://raw.githubusercontent.com/kubescape/kubescape/master/install.sh | /bin/bash
-          # Move kubescape binary to /usr/local/bin to make it accessible in PATH
-          sudo mv kubescape /usr/local/bin/
-      
+
+      # Step 3: Add Kubescape to PATH
+      - name: Add Kubescape to PATH
+        run: echo "/home/runner/.kubescape/bin" >> $GITHUB_PATH
+
+      # Step 4: Verify Kubescape Installation
       - name: Verify Kubescape Installation
         run: kubescape version
 
+      # Step 5: Scan YAML files with Kubescape
       - name: Scan YAML files
-        run: kubescape scan framework nsa **/*.yaml
+        run: kubescape scan framework nsa *.yaml
