@@ -11,11 +11,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout Repository
         uses: actions/checkout@v3
 
       - name: Install Kubescape
-        run: curl -s https://raw.githubusercontent.com/kubescape/kubescape/master/install.sh | /bin/bash
+        run: |
+          curl -s https://raw.githubusercontent.com/kubescape/kubescape/master/install.sh | /bin/bash
+          # Move kubescape binary to /usr/local/bin to make it accessible in PATH
+          sudo mv kubescape /usr/local/bin/
+      
+      - name: Verify Kubescape Installation
+        run: kubescape version
 
       - name: Scan YAML files
-        run: kubescape scan framework nsa *.yaml
+        run: kubescape scan framework nsa **/*.yaml
