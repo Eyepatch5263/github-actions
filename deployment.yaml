@@ -1,0 +1,23 @@
+version: 1.0
+application:
+  name: SampleApp
+  environment: development
+  debug: true
+database:
+  host: localhost
+  port: 5432
+  username: admin
+  password: securepassword
+  name: sample_db
+logging:
+  level: INFO
+  file: logs/app.log
+server:
+  host: 0.0.0.0
+  port: 8080
+features:
+  authentication: true
+  payments: false
+  notifications:
+    email: true
+    sms: false
